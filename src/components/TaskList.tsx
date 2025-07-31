@@ -121,6 +121,8 @@ const TaskList = () => {
         task.id === editingTask ? { ...task, description } : task
       ));
       setEditingTask(null);
+      // Clear the editor after saving
+      editorRef.current.innerHTML = '';
     }
   };
 
@@ -238,7 +240,7 @@ const TaskList = () => {
                         </div>
                         
                         <div
-                          ref={editorRef}
+                          ref={editingTask === task.id ? editorRef : null}
                           contentEditable
                           className="min-h-24 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                           style={{ minHeight: '96px' }}
@@ -264,6 +266,14 @@ const TaskList = () => {
                       </div>
                     ) : (
                       <div>
+                        {/* Display the description */}
+                        {task.description && (
+                          <div 
+                            className="mb-3 p-3 bg-gray-50 rounded-md text-sm text-gray-700"
+                            dangerouslySetInnerHTML={{ __html: task.description }}
+                          />
+                        )}
+                        
                         <div className="flex gap-2">
                           <button
                             onClick={() => startEditingDescription(task)}
