@@ -1,0 +1,6 @@
+/* Remove Tailwind for now to test basic functionality */
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+}
